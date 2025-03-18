@@ -1,21 +1,25 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use MongoDB\Laravel\Schema\Blueprint;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
     /**
      * @var string
      */
-    protected $connection = 'mongodb';
+    protected $connection = 'mysql';
+
     /**
      * @return void
      */
     public function up(): void
     {
-        Schema::create('product_histories', function (Blueprint $collection) {
-            $collection->index('code');
+        Schema::create('status_mysql', function (Blueprint $table) {
+            $table->id();
+            $table->dateTime('last_verification')
+                ->nullable();
+            $table->timestamps();
         });
     }
 
@@ -24,6 +28,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::drop('product_histories');
+        Schema::dropIfExists('status_mysql');
     }
 };
