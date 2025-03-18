@@ -11,13 +11,13 @@ use Illuminate\Support\Facades\Storage;
 
 class DownloadProductFilesService implements Service
 {
+    private string $filePath;
+
     /**
      * @param string $url
-     * @param string $filePath
      */
     public function __construct(
-        private readonly string $url,
-        private string $filePath
+        private readonly string $url
     ) {
         $this->filePath = 'downloads/' . date('YmdHis') . '.json.gz';
     }
