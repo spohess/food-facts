@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Services\Models\CreateProductHistoryWithFullArrayService;
 use App\Services\Models\CreateProductWithFullArrayService;
 use App\Services\Models\FindProductByCodeService;
 use App\Services\Models\UpdateProductWithFullArrayService;
@@ -29,6 +30,10 @@ class ETLProductsChunkJob implements ShouldQueue
     public function handle(): void
     {
         foreach ($this->chunk as $product) {
+            app()->make(CreateProductHistoryWithFullArrayService::class, [
+                'product' => $product,
+            ])();
+
             $productModel = app()->make(FindProductByCodeService::class, [
                 'code' => $product['code'],
             ])();
