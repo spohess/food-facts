@@ -50,7 +50,7 @@ class ReadProductFilesService implements Service
             if (! $data) {
                 continue;
             }
-            $chunk[] = $data;
+            $chunk[] = $this->cleanProductData($data);
             if (count($chunk) >= $chunkSize) {
                 ETLProductsChunkJob::dispatch($chunk);
                 $chunk = [];
@@ -58,8 +58,16 @@ class ReadProductFilesService implements Service
             }
         }
 
-        if (!$exitByBreak && count($chunk) > 0) {
+        if (! $exitByBreak && count($chunk) > 0) {
             ETLProductsChunkJob::dispatch($chunk);
         }
+    }
+
+    private function cleanProductData(array $data): array
+    {
+        if (isset($data['code']) && str_starts_with($data['code'], '"')) {
+            $data['code'] = (int) substr($data['code'], 1);
+        }
+        return $data;
     }
 }

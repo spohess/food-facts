@@ -52,12 +52,10 @@ services:
       retries: 3
       timeout: 5s
   mongodb:
-    image: 'mongodb/mongodb-atlas-local:latest'
+    image: 'mongo:latest'
     environment:
-      - 'MONGODB_INITDB_ROOT_USERNAME=${MONGODB_USERNAME}'
-      - 'MONGODB_INITDB_ROOT_PASSWORD=${MONGODB_PASSWORD}'
-      - 'ATLAS_LOCAL_SERVICES=mongod'
-      - 'ATLAS_LOCAL_CONFIG={"local_only":true}'
+      - MONGO_INITDB_ROOT_USERNAME=${MONGODB_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_PASSWORD}
     volumes:
       - 'sail-mongodb:/data/db'
     ports:
@@ -65,11 +63,7 @@ services:
     networks:
       - sail
     healthcheck:
-      test:
-        - CMD
-        - mongosh
-        - 'mongodb://localhost:27017/admin'
-        - '--eval=db.runCommand({ping:1})'
+      test: [ "CMD", "mongosh", "--eval", "db.adminCommand('ping')" ]
       retries: 3
       timeout: 5s
   redis:

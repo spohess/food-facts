@@ -7,3 +7,4 @@
 - **17/03/2025**: O pacote Sanctum foi instalado e configurado para segurança da API;
 - **18/03/2025**: O download dos arquivos serão feitos através de jobs, fiquei em dúvida de fazer no evento da criação do ImportControl, mas acredito que direto por job é mais fácil o entendimento/manutenção;
 - **18/03/2025**: Para a leitura do arquivo fo utilizado a extenção zlib, ela é padrão da maioria das instalações, mas deixei como dependência no composer.json. Preferi fazer assim do que utilizar intermédio do SO, por iriá criar um depedência muito maior do que usar a extenção;
+- **18/03/2025**: A imagem do mongoDB foi alterada pois a imagem da Atlas estava dando muito problema de timeout;

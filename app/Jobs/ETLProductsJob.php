@@ -7,6 +7,7 @@ use App\Exceptions\ETLJobException;
 use App\Models\ImportControl;
 use App\Services\DownloadProductFilesService;
 use App\Services\Models\UpdateImportControlWithErrorService;
+use App\Services\Models\UpdateImportControlWithSuccessService;
 use App\Services\ReadProductFilesService;
 use Exception;
 use Illuminate\Contracts\Container\BindingResolutionException;
@@ -45,12 +46,19 @@ class ETLProductsJob implements ShouldQueue
         }
 
         try {
-            app()->make(ReadProductFilesService::class, ['filePath' => $filePath])();
+            app()->make(ReadProductFilesService::class, [
+                'filePath' => $filePath,
+            ])();
         } catch (Exception $e) {
             app()->make(UpdateImportControlWithErrorService::class, [
                 'importControl' => $this->importControl,
                 'description' => $e->getMessage(),
             ])();
         }
+
+        app()->make(UpdateImportControlWithSuccessService::class, [
+            'importControl' => $this->importControl,
+            'description' => 'Processo de download e leitura do arquivo finalizada',
+        ])();
     }
 }
