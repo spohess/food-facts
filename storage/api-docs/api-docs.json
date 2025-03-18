@@ -1,0 +1,82 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Food Facts API",
+        "description": "API com informações nutricionais de alimentos",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/tokens/create": {
+            "post": {
+                "tags": [
+                    "Token",
+                    "Auth"
+                ],
+                "summary": "Criação de token de usuário para autênticação no uso da API",
+                "operationId": "ccddf0a46a9bf61977a9ec9ee430083a",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "email",
+                                        "example": "teste@examplo"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "password"
+                                    },
+                                    "token_name": {
+                                        "type": "string",
+                                        "example": "para_teste"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Token criado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "plainTextToken": {
+                                            "type": "string",
+                                            "example": "1|lQ4sE0RwgWzHCRCKsV13ISg6jZlwWb2F9kOlNqCa627d5fd9"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Não autorizado"
+                    },
+                    "422": {
+                        "description": "Credênciais inválidas"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Token",
+            "description": "Token"
+        },
+        {
+            "name": "Auth",
+            "description": "Auth"
+        }
+    ]
+}
