@@ -66,6 +66,19 @@ services:
       test: [ "CMD", "mongosh", "--eval", "db.adminCommand('ping')" ]
       retries: 3
       timeout: 5s
+  mongodb.test:
+    image: 'mongo:latest'
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGODB_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_PASSWORD}
+    volumes:
+      - 'sail-mongodb.test:/data/db'
+    networks:
+      - sail
+    healthcheck:
+      test: [ "CMD", "mongosh", "--eval", "db.adminCommand('ping')" ]
+      retries: 3
+      timeout: 5s
   redis:
     image: 'redis:alpine'
     ports:
@@ -101,6 +114,8 @@ volumes:
   sail-mysql:
     driver: local
   sail-mongodb:
+    driver: local
+  sail-mongodb.test:
     driver: local
   sail-redis:
     driver: local

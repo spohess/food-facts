@@ -1,5 +1,6 @@
 <?php
 
+use App\Enum\ImportControlStatusEnum;
 use App\Http\Controllers\API\ProductDeleteController;
 use App\Http\Controllers\API\ProductSelectAllController;
 use App\Http\Controllers\API\ProductSelectController;
@@ -11,10 +12,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', StatusServerController::class);
 
+// Rota para facilidar o teste de notificação caso de falha
 Route::put('/import/fail', function () {
     $ic = ImportControl::find(1);
-    $ic->status = 'failure';
-    $ic->save();
+    if ($ic) {
+        $ic->status = ImportControlStatusEnum::FAILURE->value;
+        $ic->save();
+
+        $ic->status = ImportControlStatusEnum::SUCCESS->value;
+        $ic->save();
+    }
 });
 
 Route::post('/tokens/create', TokenCreateController::class);

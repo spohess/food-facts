@@ -24,7 +24,7 @@ class ProductFactory extends Factory
         return [
             'code' => $this->faker->unique()->numberBetween(1, 99999999),
             'status' => $this->faker->randomElement(ProductStatusEnum::itens()),
-            'imported_t' => $this->faker->dateTimeThisYear()->format('Y-m-d\TH:i:s\Z'),
+            'imported_t' => $this->faker->dateTime(),
             'url' => $this->faker->url(),
             'creator' => $this->faker->userName(),
             'created_t' => $this->faker->dateTime(),
