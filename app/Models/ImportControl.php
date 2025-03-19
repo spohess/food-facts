@@ -3,8 +3,10 @@
 namespace App\Models;
 
 use App\Enum\ImportControlStatusEnum;
+use App\Observers\ImportControlObserver;
 use Carbon\Carbon;
 use Database\Factories\ImportControlFactory;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -17,6 +19,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  */
+#[ObservedBy([ImportControlObserver::class])]
 class ImportControl extends Model
 {
     /**

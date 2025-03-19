@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'API User',
             'email' => 'user@local',
+            'admin' => true,
         ]);
     }
 }

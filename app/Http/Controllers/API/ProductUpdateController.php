@@ -14,8 +14,8 @@ class ProductUpdateController extends Controller
     /**
      * @OA\Put(
      *     path="/api/products/{code}",
-     *     summary="Obter detalhes de um produto específico",
-     *     description="Retorna informações detalhadas de um produto baseado no código",
+     *     summary="Atualiza um produto espeficífico",
+     *     description="Atualiza com as informações enviadas o registro de um produto baseado no código",
      *     operationId="putProduct",
      *     tags={"Products"},
      *     security={{"bearerAuth":{}}},

@@ -2,6 +2,7 @@
 
 namespace App\Services\Models;
 
+use App\Enum\ProductStatusEnum;
 use App\Models\Product;
 use App\Services\Service;
 
@@ -20,6 +21,9 @@ class CreateProductWithFullArrayService implements Service
      */
     public function __invoke(): Product
     {
-        return Product::create($this->product);
+        $productWithStatus = array_merge($this->product, [
+            'status' => ProductStatusEnum::PUBLISHED->value,
+        ]);
+        return Product::create($productWithStatus);
     }
 }

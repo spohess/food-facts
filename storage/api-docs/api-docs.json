@@ -184,8 +184,8 @@
                 "tags": [
                     "Products"
                 ],
-                "summary": "Obter detalhes de um produto específico",
-                "description": "Retorna informações detalhadas de um produto baseado no código",
+                "summary": "Atualiza um produto espeficífico",
+                "description": "Atualiza com as informações enviadas o registro de um produto baseado no código",
                 "operationId": "putProduct",
                 "parameters": [
                     {
@@ -461,12 +461,317 @@
                         "bearerAuth": []
                     }
                 ]
+            },
+            "delete": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Deleta um produto espeficífico",
+                "description": "Efetua uma remoção lógico de um produto baseado no código",
+                "operationId": "deleteProduct",
+                "parameters": [
+                    {
+                        "name": "code",
+                        "in": "path",
+                        "description": "Código único do produto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 88
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Produto deletado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Produto deletado com sucesso"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Produto não encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Produto não encontrado"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Não autorizado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/products": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Lista de produtos",
+                "description": "Retorna uma lista de produtos com paginação",
+                "operationId": "getAllProduct",
+                "parameters": [
+                    {
+                        "name": "code",
+                        "in": "path",
+                        "description": "Código único do produto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 88
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de produtos",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "code": {
+                                                        "type": "integer",
+                                                        "example": 17
+                                                    },
+                                                    "status": {
+                                                        "type": "string",
+                                                        "example": "published"
+                                                    },
+                                                    "imported_t": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": null,
+                                                        "nullable": true
+                                                    },
+                                                    "url": {
+                                                        "type": "string",
+                                                        "example": "http://world-en.openfoodfacts.org/product/0000000000017/vitoria-crackers"
+                                                    },
+                                                    "creator": {
+                                                        "type": "string",
+                                                        "example": "kiliweb"
+                                                    },
+                                                    "created_t": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2018-06-15T10:38:00.000000Z"
+                                                    },
+                                                    "last_modified_t": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2019-06-25T11:55:18.000000Z"
+                                                    },
+                                                    "product_name": {
+                                                        "type": "string",
+                                                        "example": "Vitória crackers"
+                                                    },
+                                                    "quantity": {
+                                                        "type": "string",
+                                                        "example": ""
+                                                    },
+                                                    "brands": {
+                                                        "type": "string",
+                                                        "example": ""
+                                                    },
+                                                    "categories": {
+                                                        "type": "string",
+                                                        "example": ""
+                                                    },
+                                                    "labels": {
+                                                        "type": "string",
+                                                        "example": ""
+                                                    },
+                                                    "cities": {
+                                                        "type": "string",
+                                                        "example": ""
+                                                    },
+                                                    "purchase_places": {
+                                                        "type": "string",
+                                                        "example": ""
+                                                    },
+                                                    "stores": {
+                                                        "type": "string",
+                                                        "example": ""
+                                                    },
+                                                    "ingredients_text": {
+                                                        "type": "string",
+                                                        "example": ""
+                                                    },
+                                                    "traces": {
+                                                        "type": "string",
+                                                        "example": ""
+                                                    },
+                                                    "serving_size": {
+                                                        "type": "string",
+                                                        "example": ""
+                                                    },
+                                                    "serving_quantity": {
+                                                        "type": "string",
+                                                        "example": ""
+                                                    },
+                                                    "nutriscore_score": {
+                                                        "type": "string",
+                                                        "example": ""
+                                                    },
+                                                    "nutriscore_grade": {
+                                                        "type": "string",
+                                                        "example": ""
+                                                    },
+                                                    "main_category": {
+                                                        "type": "string",
+                                                        "example": ""
+                                                    },
+                                                    "image_url": {
+                                                        "type": "string",
+                                                        "example": "https://static.openfoodfacts.org/images/products/000/000/000/0017/front_fr.4.400.jpg"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "meta": {
+                                            "properties": {
+                                                "current_page": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "from": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "last_page": {
+                                                    "type": "integer",
+                                                    "example": 45
+                                                },
+                                                "links": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "url": {
+                                                                "type": "string",
+                                                                "example": null,
+                                                                "nullable": true
+                                                            },
+                                                            "label": {
+                                                                "type": "string",
+                                                                "example": "&laquo; Previous"
+                                                            },
+                                                            "active": {
+                                                                "type": "boolean",
+                                                                "example": false
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "path": {
+                                                    "type": "string",
+                                                    "example": "http://localhost/api/products"
+                                                },
+                                                "per_page": {
+                                                    "type": "integer",
+                                                    "example": 20
+                                                },
+                                                "to": {
+                                                    "type": "integer",
+                                                    "example": 20
+                                                },
+                                                "total": {
+                                                    "type": "integer",
+                                                    "example": 899
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Produto não encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Produto não encontrado"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Não autorizado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/api/tokens/create": {
             "post": {
                 "tags": [
-                    "Token",
                     "Auth"
                 ],
                 "summary": "Criação de token",
@@ -540,10 +845,6 @@
         {
             "name": "Products",
             "description": "Products"
-        },
-        {
-            "name": "Token",
-            "description": "Token"
         },
         {
             "name": "Auth",

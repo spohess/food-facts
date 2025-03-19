@@ -23,7 +23,7 @@ class TokenCreateController extends Controller
      *     summary="Criação de token",
      *     description="Criação de token de usuário para autênticação no uso da API",
      *     operationId="createToken",
-     *     tags={"Token", "Auth"},
+     *     tags={"Auth"},
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
