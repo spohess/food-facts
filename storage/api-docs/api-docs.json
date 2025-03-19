@@ -6,14 +6,472 @@
         "version": "1.0.0"
     },
     "paths": {
+        "/api/products/{code}": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Obter detalhes de um produto específico",
+                "description": "Retorna informações detalhadas de um produto baseado no código",
+                "operationId": "getProduct",
+                "parameters": [
+                    {
+                        "name": "code",
+                        "in": "path",
+                        "description": "Código único do produto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 88
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Detalhes do produto solicitado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "code": {
+                                                    "type": "integer",
+                                                    "example": 88
+                                                },
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": null,
+                                                    "nullable": true
+                                                },
+                                                "imported_t": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": null,
+                                                    "nullable": true
+                                                },
+                                                "url": {
+                                                    "type": "string",
+                                                    "example": "http://world-en.openfoodfacts.org/product/000000000088/pate-d-amende"
+                                                },
+                                                "creator": {
+                                                    "type": "string",
+                                                    "example": "kiliweb"
+                                                },
+                                                "created_t": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2019-12-26T11:03:42.000000Z"
+                                                },
+                                                "last_modified_t": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2019-12-26T11:06:50.000000Z"
+                                                },
+                                                "product_name": {
+                                                    "type": "string",
+                                                    "example": "Pate d'amende"
+                                                },
+                                                "quantity": {
+                                                    "type": "string",
+                                                    "example": ""
+                                                },
+                                                "brands": {
+                                                    "type": "string",
+                                                    "example": ""
+                                                },
+                                                "categories": {
+                                                    "type": "string",
+                                                    "example": "Pâte d'amende"
+                                                },
+                                                "labels": {
+                                                    "type": "string",
+                                                    "example": ""
+                                                },
+                                                "cities": {
+                                                    "type": "string",
+                                                    "example": ""
+                                                },
+                                                "purchase_places": {
+                                                    "type": "string",
+                                                    "example": ""
+                                                },
+                                                "stores": {
+                                                    "type": "string",
+                                                    "example": ""
+                                                },
+                                                "ingredients_text": {
+                                                    "type": "string",
+                                                    "example": ""
+                                                },
+                                                "traces": {
+                                                    "type": "string",
+                                                    "example": ""
+                                                },
+                                                "serving_size": {
+                                                    "type": "string",
+                                                    "example": ""
+                                                },
+                                                "serving_quantity": {
+                                                    "type": "string",
+                                                    "example": ""
+                                                },
+                                                "nutriscore_score": {
+                                                    "type": "string",
+                                                    "example": ""
+                                                },
+                                                "nutriscore_grade": {
+                                                    "type": "string",
+                                                    "example": ""
+                                                },
+                                                "main_category": {
+                                                    "type": "string",
+                                                    "example": "fr:pate-d-amende"
+                                                },
+                                                "image_url": {
+                                                    "type": "string",
+                                                    "example": "https://static.openfoodfacts.org/images/products/000/000/000/088/front_fr.3.400.jpg"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Produto não encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Produto não encontrado"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Não autorizado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Obter detalhes de um produto específico",
+                "description": "Retorna informações detalhadas de um produto baseado no código",
+                "operationId": "putProduct",
+                "parameters": [
+                    {
+                        "name": "code",
+                        "in": "path",
+                        "description": "Código único do produto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 88
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "status": {
+                                        "type": "string",
+                                        "example": null,
+                                        "nullable": true
+                                    },
+                                    "imported_t": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": null,
+                                        "nullable": true
+                                    },
+                                    "code": {
+                                        "type": "integer",
+                                        "example": 88
+                                    },
+                                    "url": {
+                                        "type": "string",
+                                        "example": "http://world-en.openfoodfacts.org/product/000000000088/pate-d-amende"
+                                    },
+                                    "creator": {
+                                        "type": "string",
+                                        "example": "kiliweb"
+                                    },
+                                    "created_t": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2019-12-26T11:03:42.000000Z"
+                                    },
+                                    "last_modified_t": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2019-12-26T11:06:50.000000Z"
+                                    },
+                                    "product_name": {
+                                        "type": "string",
+                                        "example": "Pate d'amende"
+                                    },
+                                    "quantity": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "brands": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "categories": {
+                                        "type": "string",
+                                        "example": "Pâte d'amende"
+                                    },
+                                    "labels": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "cities": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "purchase_places": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "stores": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "ingredients_text": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "traces": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "serving_size": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "serving_quantity": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "nutriscore_score": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "nutriscore_grade": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "main_category": {
+                                        "type": "string",
+                                        "example": "fr:pate-d-amende"
+                                    },
+                                    "image_url": {
+                                        "type": "string",
+                                        "example": "https://static.openfoodfacts.org/images/products/000/000/000/088/front_fr.3.400.jpg"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Detalhes do produto solicitado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": null,
+                                                    "nullable": true
+                                                },
+                                                "imported_t": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": null,
+                                                    "nullable": true
+                                                },
+                                                "code": {
+                                                    "type": "integer",
+                                                    "example": 88
+                                                },
+                                                "url": {
+                                                    "type": "string",
+                                                    "example": "http://world-en.openfoodfacts.org/product/000000000088/pate-d-amende"
+                                                },
+                                                "creator": {
+                                                    "type": "string",
+                                                    "example": "kiliweb"
+                                                },
+                                                "created_t": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2019-12-26T11:03:42.000000Z"
+                                                },
+                                                "last_modified_t": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2019-12-26T11:06:50.000000Z"
+                                                },
+                                                "product_name": {
+                                                    "type": "string",
+                                                    "example": "Pate d'amende"
+                                                },
+                                                "quantity": {
+                                                    "type": "string",
+                                                    "example": ""
+                                                },
+                                                "brands": {
+                                                    "type": "string",
+                                                    "example": ""
+                                                },
+                                                "categories": {
+                                                    "type": "string",
+                                                    "example": "Pâte d'amende"
+                                                },
+                                                "labels": {
+                                                    "type": "string",
+                                                    "example": ""
+                                                },
+                                                "cities": {
+                                                    "type": "string",
+                                                    "example": ""
+                                                },
+                                                "purchase_places": {
+                                                    "type": "string",
+                                                    "example": ""
+                                                },
+                                                "stores": {
+                                                    "type": "string",
+                                                    "example": ""
+                                                },
+                                                "ingredients_text": {
+                                                    "type": "string",
+                                                    "example": ""
+                                                },
+                                                "traces": {
+                                                    "type": "string",
+                                                    "example": ""
+                                                },
+                                                "serving_size": {
+                                                    "type": "string",
+                                                    "example": ""
+                                                },
+                                                "serving_quantity": {
+                                                    "type": "string",
+                                                    "example": ""
+                                                },
+                                                "nutriscore_score": {
+                                                    "type": "string",
+                                                    "example": ""
+                                                },
+                                                "nutriscore_grade": {
+                                                    "type": "string",
+                                                    "example": ""
+                                                },
+                                                "main_category": {
+                                                    "type": "string",
+                                                    "example": "fr:pate-d-amende"
+                                                },
+                                                "image_url": {
+                                                    "type": "string",
+                                                    "example": "https://static.openfoodfacts.org/images/products/000/000/000/088/front_fr.3.400.jpg"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Produto não encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Produto não encontrado"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Não autorizado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/tokens/create": {
             "post": {
                 "tags": [
                     "Token",
                     "Auth"
                 ],
-                "summary": "Criação de token de usuário para autênticação no uso da API",
-                "operationId": "ccddf0a46a9bf61977a9ec9ee430083a",
+                "summary": "Criação de token",
+                "description": "Criação de token de usuário para autênticação no uso da API",
+                "operationId": "createToken",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -26,7 +484,7 @@
                                 "properties": {
                                     "email": {
                                         "type": "email",
-                                        "example": "teste@examplo"
+                                        "example": "user@local"
                                     },
                                     "password": {
                                         "type": "string",
@@ -69,7 +527,20 @@
             }
         }
     },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "bearerFormat": "API Token",
+                "scheme": "bearer"
+            }
+        }
+    },
     "tags": [
+        {
+            "name": "Products",
+            "description": "Products"
+        },
         {
             "name": "Token",
             "description": "Token"

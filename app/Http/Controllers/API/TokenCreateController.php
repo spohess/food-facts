@@ -7,18 +7,28 @@ use App\Http\Requests\PostUserTokenRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * @OA\SecurityScheme(
+ *     securityScheme="bearerAuth",
+ *     type="http",
+ *     scheme="bearer",
+ *     bearerFormat="API Token"
+ * )
+ */
 class TokenCreateController extends Controller
 {
     /**
      * @OA\Post(
      *     path="/api/tokens/create",
-     *     summary="Criação de token de usuário para autênticação no uso da API",
+     *     summary="Criação de token",
+     *     description="Criação de token de usuário para autênticação no uso da API",
+     *     operationId="createToken",
      *     tags={"Token", "Auth"},
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
      *             required={"email", "password"},
-     *             @OA\Property(property="email", type="email", example="teste@examplo"),
+     *             @OA\Property(property="email", type="email", example="user@local"),
      *             @OA\Property(property="password", type="string", example="password"),
      *             @OA\Property(property="token_name", type="string", example="para_teste"),
      *         )
